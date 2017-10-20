@@ -67,8 +67,42 @@ function begin() {
 
         ])
         .then(function(resp) {
-    	    console.log(resp.choice);
-    	    console.log(resp.quantity);
+
+        	connection.query("SELECT stock_quantity, price FROM products WHERE ?",
+        	  { item_id: parseInt(resp.choice) },
+               function(err,res) {
+		           if (err) throw err;
+		        
+	               if (res[0].stock_quantity < resp.quantity) {
+                      console.log("Insufficient Stock Remaining");
+	               }
+	               else {
+	               	    
+	               	    var newQuant = parseInt(res[0].stock_quantity - resp.quantity);
+	               	    console.log(newQuant);
+	               	    connection.query(
+                            "UPDATE products SET ? WHERE ?",
+                             [
+                               {
+                               	stock_quantity: newQuant
+                               },
+                               {
+                               	item_id:resp.choice
+                               }
+
+                             ],
+                             function(err) {
+                             	if (err) throw err;
+                             	console.log("Order Successfully placed")
+                             	console.log("You Owe: " + res[0].price * resp.quantity);
+                             	begin();
+                             } 
+    	               	)
+	               };
+               }
+
+        	 );
+    	    
         });
 
 	});
