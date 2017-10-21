@@ -15,10 +15,10 @@ The customer interface allows the user to view the current inventory of store it
 
 To run the customer interface:
 
-* clone this repository
-* cd bamazon
-* npm install
-* node bamazon.js
+1. clone this repository
+1. cd bamazon
+1. npm install
+1. node bamazon.js
 
 ## Supervisor View
 
