@@ -20,6 +20,16 @@ To run the customer interface:
 1. npm install
 1. node bamazon.js
 
+## Manager View
+
+The manager view interface allows the user 4 functionality paths:
+
+1. Product View - Lists all products available in database.
+1. Product View Low Inventory - Lists all products available with low inventory.
+1. Add Inventory - Allows manager to manipulate the inventory of a given item.
+1. Add new Product - Allows manager to add a new product to database.
+
 ## Supervisor View
 
 Coming Soon...
+
