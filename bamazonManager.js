@@ -51,7 +51,7 @@ function startView() {
             viewLowInvent();
             break;
          case "Add to Inventory":
-            addInventory();
+            addInvent();
             break;
          case "Add New Product":
             addProduct();  
@@ -91,8 +91,9 @@ function viewProducts() {
     		  var id = results[i].item_id;
     		  var name = results[i].product_name;
     		  var price = results[i].price;
+          var quant = results[i].stock_quantity;
     		  // what the user will be given to choose from 
-    		  var string = "Item Number: " + id + " Product: " + name + " Price: $" + price
+    		  var string = "Item Number: " + id + " Product: " + name + " Price: $" + price + " Quantity Remaining: " + quant;
           choiceArray.push(string);
     	}
           console.log("Product Selection:")
@@ -102,7 +103,7 @@ function viewProducts() {
     });  
 };
 
-
+// View products in which inventory is low
 function viewLowInvent() {
     connection.query("Select * FROM products WHERE stock_quantity < 20", function(err,results){
       if (err) throw err;
@@ -126,12 +127,74 @@ function viewLowInvent() {
     }); 
 };
 
+// Allows manager to add to inventory of a certain product
 function addInvent() {
+   inquirer.prompt([
+      {
+        name: "choice",
+        type: "list",
+        choices: ["1","2","3","4","5","6","7","8","9","10"],
+        message: "Select product to update Stock"
+      },
+      {
+        name:"quantity",
+        type:"input",
+        message:"Enter updated stock of product"
+      }   
 
-};
+    ]).then(function(resp) {
+          connection.query("UPDATE products SET ? WHERE ?", 
+            [{ stock_quantity: resp.quantity },
+             { item_id: resp.choice          }], 
+            function(err,res){
+              if (err) throw err;
+              console.log("stock updated");
+              restartView();
+            })
+
+       });
+
+};    
 
 function addProduct() {
+    inquirer.prompt([
+       {
+        type:"input",
+        message:"new product name",
+        name:"newProduct"
+       },
+       {
+        type:"input",
+        message:"enter department name",
+        name:"newDepartment"
+       },
+       {
+        type:"input",
+        message:"enter product price",
+        name: "newPrice"
+       },
+       {
+        type:"input",
+        message:"enter stock quantity",
+        name:"newQuant"
+       }
+    ]).then(function(r){
+        connection.query("INSERT INTO products SET ?", 
+            {
+               product_name: r.newProduct,
+               department_name: r.newDepartment,
+               price: r.newPrice,
+               stock_quantity: r.newQuant
+            },
+            function(err,res){
+              if (err) throw err;
+              console.log("product added");
+              restartView();
+            }
 
+        );
+
+    });
 };
 
 
