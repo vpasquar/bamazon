@@ -84,7 +84,8 @@ function begin() {
                             "UPDATE products SET ? WHERE ?",
                              [
                                {
-                               	stock_quantity: newQuant
+                               	stock_quantity: newQuant,
+                                product_sales: (res[0].price * resp.quantity)
                                },
                                {
                                	item_id:resp.choice
