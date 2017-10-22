@@ -15,11 +15,21 @@ The customer interface allows the user to view the current inventory of store it
 
 To run the customer interface:
 
-clone this repository
-cd bamazon
-npm install
-node bamazon.js
+1. clone this repository
+1. cd bamazon
+1. npm install
+1. node bamazon.js
+
+## Manager View
+
+The manager view interface allows the user 4 functionality paths:
+
+1. Product View - Lists all products available in database.
+1. Product View Low Inventory - Lists all products available with low inventory.
+1. Add Inventory - Allows manager to manipulate the inventory of a given item.
+1. Add new Product - Allows manager to add a new product to database.
 
 ## Supervisor View
 
 Coming Soon...
+
