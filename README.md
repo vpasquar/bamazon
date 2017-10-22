@@ -18,7 +18,7 @@ To run the customer interface:
 1. clone this repository
 1. cd bamazon
 1. npm install
-1. node bamazon.js
+1. node bamazonCustomer.js
 
 ## Manager View
 
@@ -29,7 +29,21 @@ The manager view interface allows the user 4 functionality paths:
 1. Add Inventory - Allows manager to manipulate the inventory of a given item.
 1. Add new Product - Allows manager to add a new product to database.
 
+To run the manager interface:
+
+1. clone this repository
+1. cd bamazon
+1. npm install
+1. node bamazonManager.js
+
 ## Supervisor View
 
-Coming Soon...
+Functionality includes the user being able to view product sales by each department and being able to add a department to both the products and departments table. 
+
+To run the Supervisor interface:
+
+1. clone this repository
+1. cd bamazon
+1. npm install
+1. node bamazonSupervisor.js
 
